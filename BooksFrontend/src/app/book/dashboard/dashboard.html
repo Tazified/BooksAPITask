@@ -1,0 +1,54 @@
+<div class="p-6 space-y-4">
+
+  <!-- Action selector -->
+  <div class="flex gap-6 items-center">
+    <label *ngFor="let act of actions" class="flex items-center gap-1">
+      <input type="radio" name="action"
+             [value]="act.key"
+             [(ngModel)]="selected" />
+      {{ act.label }}
+    </label>
+
+    <button (click)="execute()"
+            [disabled]="isDisabled()"
+            class="px-4 py-1 bg-blue-600 text-white rounded">
+      Proceed
+    </button>
+  </div>
+
+  <!-- Dynamic form -->
+  <div *ngIf="selected!=='load'" class="grid grid-cols-2 gap-2 w-96">
+    <input [(ngModel)]="form.isbn"
+           placeholder="ISBN"
+           class="border p-1 rounded" />
+
+    <ng-container *ngIf="selected==='add' || selected==='update'">
+      <input [(ngModel)]="form.title"
+             placeholder="Title" class="border p-1 rounded" />
+      <input [(ngModel)]="form.author"
+             placeholder="Author" class="border p-1 rounded" />
+      <input [(ngModel)]="form.publicationYear" type="number"
+             placeholder="Year" class="border p-1 rounded" />
+    </ng-container>
+  </div>
+
+  <!-- Feedback -->
+  <p class="text-red-600" *ngIf="error()">{{ error() }}</p>
+  <p class="text-green-600" *ngIf="singleBook()">{{ singleBook() | json }}</p>
+
+  <!-- Table -->
+  <table *ngIf="books().length" class="border-collapse border w-full">
+    <thead>
+      <tr><th>ISBN</th><th>Title</th><th>Author</th><th>Year</th></tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let b of books()">
+        <td>{{ b.isbn }}</td>
+        <td>{{ b.title }}</td>
+        <td>{{ b.author }}</td>
+        <td>{{ b.publicationYear }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

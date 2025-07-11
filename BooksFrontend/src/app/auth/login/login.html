@@ -1,0 +1,11 @@
+<!-- login.component.html -->
+<form [formGroup]="form" (ngSubmit)="submit()" class="flex flex-col gap-3 w-64">
+  <input type="text" placeholder="Username" formControlName="username" class="border p-2 rounded" />
+  <input type="password" placeholder="Password" formControlName="password" class="border p-2 rounded" />
+
+  <button type="submit" class="bg-blue-600 text-white p-2 rounded">
+    Login
+  </button>
+
+  <p class="text-red-600" *ngIf="error">{{ error }}</p>
+</form>
