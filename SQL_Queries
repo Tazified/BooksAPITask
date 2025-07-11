@@ -1,0 +1,31 @@
+CREATE DATABASE booksapi;
+USE booksapi;
+
+
+
+CREATE TABLE user (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role VARCHAR(20) DEFAULT 'USER'
+);
+
+
+CREATE TABLE book (
+    isbn VARCHAR(20) PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    author VARCHAR(255) NOT NULL,
+    publication_year INT NOT NULL
+);
+
+
+
+INSERT INTO book (isbn, title, author, publication_year) VALUES
+('978-0140449136', 'The Odyssey', 'Homer', 1996),
+('978-0679783275', 'Pride and Prejudice', 'Jane Austen', 2000),
+('978-0439023528', 'The Hunger Games', 'Suzanne Collins', 2008);
+
+
+INSERT INTO user (username, password, role) VALUES
+('admin', '$2a$10$N9qo8uLOickgx2ZMRZo5e.PW0vX3/jgw9U5c5SqpzvkgP5mYvdS4u', 'ADMIN'),
+('user1', '$2a$10$N9qo8uLOickgx2ZMRZo5e.PW0vX3/jgw9U5c5SqpzvkgP5mYvdS4u', 'USER');
